@@ -1,0 +1,5 @@
+cn.com.aratek.demo1.test.app-core-1.6.1-0 C:\Users\MHL-PC-20\.gradle\caches\transforms-4\806328e4ec6b41988d61d7f7b95d5aa2\transformed\core-1.6.1\res
+cn.com.aratek.demo1.test.app-androidTest-1 C:\Users\MHL-PC-20\AndroidStudioProjects\Aratek_BMApi_Demo1\Aratek_BMApi_Demo1\app\build\generated\res\resValues\androidTest\debug
+cn.com.aratek.demo1.test.app-mergeDebugAndroidTestResources-2 C:\Users\MHL-PC-20\AndroidStudioProjects\Aratek_BMApi_Demo1\Aratek_BMApi_Demo1\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+cn.com.aratek.demo1.test.app-mergeDebugAndroidTestResources-3 C:\Users\MHL-PC-20\AndroidStudioProjects\Aratek_BMApi_Demo1\Aratek_BMApi_Demo1\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+cn.com.aratek.demo1.test.app-debugAndroidTest-4 C:\Users\MHL-PC-20\AndroidStudioProjects\Aratek_BMApi_Demo1\Aratek_BMApi_Demo1\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

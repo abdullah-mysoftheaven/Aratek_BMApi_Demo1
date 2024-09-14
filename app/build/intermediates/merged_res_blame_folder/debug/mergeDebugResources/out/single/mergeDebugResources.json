@@ -1,0 +1,78 @@
+[
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_icon.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable_mysoft_logo.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable\\mysoft_logo.png"
+    },
+    {
+        "merged": "cn.com.aratek.demo.app-debug-27:/drawable_app_logo.png.flat",
+        "source": "cn.com.aratek.demo.app-main-29:/drawable/app_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\layout_activity_fingerprint.xml.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\layout\\activity_fingerprint.xml"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\layout-port_activity_fingerprint.xml.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\layout-port\\activity_fingerprint.xml"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_nophoto.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\nophoto.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable_button.xml.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable\\button.xml"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-ldpi_icon.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-ldpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_tab_unselected.9.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\tab_unselected.9.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable_tab_indicator.xml.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable\\tab_indicator.xml"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-hdpi_icon.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-hdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_tab_press.9.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\tab_press.9.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_button_pressed.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\button_pressed.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_tab_focus.9.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\tab_focus.9.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_edittext.9.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\edittext.9.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable_image.jpg.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable\\image.jpg"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_nofinger.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\nofinger.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_button_normal.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\button_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-debug-27:\\drawable-mdpi_tab_selected.9.png.flat",
+        "source": "C:\\Users\\MHL-PC-20\\.gradle\\daemon\\8.7\\cn.com.aratek.demo.app-main-29:\\drawable-mdpi\\tab_selected.9.png"
+    }
+]
