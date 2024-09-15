@@ -8,14 +8,19 @@
         android:minSdkVersion="30"
         android:targetSdkVersion="34" />
 
-    <uses-permission android:name="android.permission.BLUETOOTH" />
--->
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
--->
+    <!-- Permissions for external storage (deprecated in API 33+) -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-    <!-- 6.0需加入的权限 -->
+
+    <!-- Bluetooth permissions -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- Location permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 

@@ -249,60 +249,6 @@ public class FingerprintDemo extends Activity implements View.OnClickListener
     }
 
 
-
-//    @Override
-//    public void onClick(View v) {
-//
-//
-//        switch (v.getId()) {
-//            case R.id.bt_enroll:
-//                enroll();
-//                break;
-//            case R.id.bt_verify:
-//                verify();
-//                break;
-//            case R.id.bt_identify:
-//                identify();
-//                break;
-//            case R.id.bt_clear:
-//                clearFingerprintDatabase();
-//                break;
-//            case R.id.bt_delete:
-//                deleteFingerprintFromDatabase();
-//                break;
-//            case R.id.bt_show:
-//                showFingerprintImage();
-//                break;
-//            case R.id.bt_get_capacity:
-//                getCapacity();
-//                break;
-//            case R.id.bt_get_enrolled_count:
-//                getEnrolledCount();
-//                break;
-//            case R.id.bt_get_enrolled_list:
-//                getEnrolledList();
-//                break;
-//            case R.id.bt_get_template_from_chip:
-//                getTemplateFromChip();
-//                break;
-//            case R.id.bt_download_template_to_chip:
-//                downloadTemplateToChip();
-//                break;
-//            case R.id.bt_capture_feature:
-//                captureFeature();
-//                break;
-//            case R.id.bt_extract_feature:
-//                extractFeature();
-//                break;
-//            case R.id.bt_capture_iso_feature:
-//                captureISOFeature();
-//                break;
-//            case R.id.bt_extract_iso_feature:
-//                extractISOFeature();
-//                break;
-//        }
-//    }
-
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -360,10 +306,26 @@ public class FingerprintDemo extends Activity implements View.OnClickListener
 
                     }
 
+
+
                     ///myerror
-                    if ((error = Bione.initialize(FingerprintDemo.this, FP_DB_PATH)) != Bione.RESULT_OK) {
-                        showError(getString(R.string.algorithm_initialization_failed), getFingerprintErrorString(error));
+                    File file = new File(FP_DB_PATH);
+                    if (!file.exists()) {
+                        Log.e(TAG, "Database file not found at path: " + FP_DB_PATH);
                     }
+                    int errorrr = Bione.initialize(FingerprintDemo.this, FP_DB_PATH);
+                    if (error != Bione.RESULT_OK) {
+                        Log.e(TAG, "Fingerprint algorithm initialization failed with error code: " + errorrr);
+                        String errorMessage = getFingerprintErrorString(errorrr);
+                        Log.e(TAG, "Error message: " + errorMessage);
+                        showError(getString(R.string.algorithm_initialization_failed), errorMessage);
+                    }
+
+
+
+//                    if ((error = Bione.initialize(FingerprintDemo.this, FP_DB_PATH)) != Bione.RESULT_OK) {
+//                        showError(getString(R.string.algorithm_initialization_failed), getFingerprintErrorString(error));
+//                    }
 
 //                    if ((error = Bione.initialize(FingerprintDemo.this, FP_DB_PATH)) != Bione.RESULT_OK) {
 //                        showError(getString(R.string.algorithm_initialization_failed), getFingerprintErrorString(error));
@@ -679,6 +641,9 @@ public class FingerprintDemo extends Activity implements View.OnClickListener
     }
     private int mId;
 
+
+
+
     private class FingerprintTask extends AsyncTask<String, Integer, Void> {
         private boolean mIsDone = false;
 
@@ -689,6 +654,215 @@ public class FingerprintDemo extends Activity implements View.OnClickListener
 
         @Override
         protected Void doInBackground(String... params) {
+            long startTime;
+            FingerprintImage fi = null;
+            byte[] fpFeat = null, fpTemp = null;
+            Result res;
+
+            int error = 0;
+            try {
+                // Your existing code
+                if (params[0].equals("show") || params[0].equals("enroll") || params[0].equals("verify") || params[0].equals("identify")) {
+                    showProgressDialog(getString(R.string.loading), getString(R.string.press_finger));
+                    mScanner.prepare();
+
+                    int capRetry = 0;
+                    long timeout = 100 * 10;
+                    do {
+                        long time = System.currentTimeMillis();
+                        res = mScanner.capture();
+                        long endTime = System.currentTimeMillis();
+                        showCaptureTime("capture time:" + (endTime - time));
+                        Log.i("Sanny", "capture time:" + (endTime - time));
+                        error = res.error;
+
+                        if (error == FingerprintScanner.TIMEOUT) {
+                            timeout--;
+                            if (timeout == 0) break;
+                            Thread.sleep(10);
+                            continue;
+                        }
+
+                        fi = (FingerprintImage) res.data;
+                        if (fi != null) {
+                            int quality = Bione.getFingerprintQuality(fi);
+                            Log.i(TAG, "Fingerprint image quality is " + quality);
+
+                            if (quality < 50 && capRetry < 3 && !isCancelled()) {
+                                capRetry++;
+                                continue;
+                            }
+                        }
+
+                        if (error != FingerprintScanner.NO_FINGER || isCancelled()) {
+                            Log.i("Sanny", "error 2222:" + error);
+                            break;
+                        }
+                    } while (true);
+
+                    mScanner.finish();
+                    if (!isCancelled() && error != FingerprintScanner.RESULT_OK) {
+                        showError(getString(R.string.capture_image_failed), getFingerprintErrorString(error));
+                    } else {
+                        mLastImage = fi;
+                        updateFingerprintImage(fi);
+                        showInformation(getString(R.string.capture_image_success), null);
+                    }
+                }
+
+                if (params[0].equals("enroll") || params[0].equals("verify") || params[0].equals("identify")) {
+                    if (fi != null) {
+                        startTime = System.currentTimeMillis();
+                        res = Bione.extractFeature(fi);
+                        if (res.error != Bione.RESULT_OK) {
+                            showError(getString(R.string.enroll_failed_because_of_extract_feature), getFingerprintErrorString(res.error));
+                        } else {
+                            fpFeat = (byte[]) res.data;
+                        }
+                    }
+                }
+
+                if (params[0].equals("enroll")) {
+                    int ret;
+                    int id = Bione.getFreeID();
+                    if (id < 0) {
+                        showError(getString(R.string.enroll_failed_because_of_get_id), getFingerprintErrorString(id));
+                    } else {
+                        startTime = System.currentTimeMillis();
+                        res = Bione.makeTemplate(fpFeat, fpFeat, fpFeat);
+                        if (res.error != Bione.RESULT_OK) {
+                            showError(getString(R.string.enroll_failed_because_of_make_template), getFingerprintErrorString(res.error));
+                        } else {
+                            fpTemp = (byte[]) res.data;
+                            ret = Bione.enroll(id, fpTemp);
+                            if (ret != Bione.RESULT_OK) {
+                                showError(getString(R.string.enroll_failed_because_of_error), getFingerprintErrorString(ret));
+                            } else {
+                                mId = id;
+                                showInformation(getString(R.string.enroll_success), getString(R.string.enrolled_id, id));
+                            }
+                        }
+                    }
+                } else if (params[0].equals("verify")) {
+                    startTime = System.currentTimeMillis();
+                    res = Bione.verify(mId, fpFeat);
+                    if (res.error != Bione.RESULT_OK) {
+                        showError(getString(R.string.verify_failed_because_of_error), getFingerprintErrorString(res.error));
+                    } else {
+                        if ((Boolean) res.data) {
+                            showInformation(getString(R.string.fingerprint_match), getString(R.string.fingerprint_similarity, res.arg1));
+                        } else {
+                            showError(getString(R.string.fingerprint_not_match), getString(R.string.fingerprint_similarity, res.arg1));
+                        }
+                    }
+                } else if (params[0].equals("identify")) {
+                    startTime = System.currentTimeMillis();
+                    int id = Bione.identify(fpFeat);
+                    if (id < 0) {
+                        showError(getString(R.string.identify_failed_because_of_error), getFingerprintErrorString(id));
+                    } else {
+                        showInformation(getString(R.string.identify_match), getString(R.string.matched_id, id));
+                    }
+                } else if (params[0].equals("captureISO")) {
+                    byte[] feature;
+                    showProgressDialog(getString(R.string.loading), getString(R.string.press_finger));
+                    mScanner.prepare();
+                    do {
+                        res = mScanner.captureAndGetIsoFeature();
+                        error = res.error;
+                        feature = (byte[]) res.data;
+
+                        if (error != FingerprintScanner.NO_FINGER || isCancelled()) {
+                            break;
+                        }
+                    } while (true);
+
+                    mScanner.finish();
+                    if (!isCancelled() && error != FingerprintScanner.RESULT_OK) {
+                        showError(getString(R.string.capture_image_failed), getFingerprintErrorString(error));
+                    } else {
+                        showInformation(getString(R.string.capture_image_success), null);
+                    }
+                } else if (params[0].equals("extractISO")) {
+                    if (mLastImage == null) {
+                        showError(getString(R.string.extract_feature_failed), getString(R.string.finger_image_not_captured));
+                    } else {
+                        byte[] feature;
+                        showProgressDialog(getString(R.string.loading), null);
+                        do {
+                            res = mScanner.extractIsoFeatureOnChip(mLastImage);
+                            error = res.error;
+                            feature = (byte[]) res.data;
+
+                            if (error != FingerprintScanner.NO_FINGER || isCancelled()) {
+                                break;
+                            }
+                        } while (true);
+
+                        if (!isCancelled() && error != FingerprintScanner.RESULT_OK) {
+                            showError(getString(R.string.extract_feature_failed), getFingerprintErrorString(error));
+                        } else {
+                            showInformation(getString(R.string.extract_feature_success), null);
+                        }
+                    }
+                } else if (params[0].equals("captureFeature")) {
+                    byte[] feature;
+                    showProgressDialog(getString(R.string.loading), getString(R.string.press_finger));
+                    mScanner.prepare();
+                    do {
+                        res = mScanner.captureAndGetFeature();
+                        error = res.error;
+                        feature = (byte[]) res.data;
+
+                        if (error != FingerprintScanner.NO_FINGER || isCancelled()) {
+                            break;
+                        }
+                    } while (true);
+
+                    mScanner.finish();
+                    if (!isCancelled() && error != FingerprintScanner.RESULT_OK) {
+                        showError(getString(R.string.capture_image_failed), getFingerprintErrorString(error));
+                    } else {
+                        showInformation(getString(R.string.capture_image_success), null);
+                    }
+                } else if (params[0].equals("extractFeature")) {
+                    if (mLastImage == null) {
+                        showError(getString(R.string.extract_feature_failed), getString(R.string.finger_image_not_captured));
+                    } else {
+                        byte[] feature;
+                        showProgressDialog(getString(R.string.loading), null);
+                        do {
+                            res = mScanner.extractFeatureOnChip(mLastImage);
+                            error = res.error;
+                            feature = (byte[]) res.data;
+
+                            if (error != FingerprintScanner.NO_FINGER || isCancelled()) {
+                                break;
+                            }
+                        } while (true);
+
+                        if (!isCancelled() && error != FingerprintScanner.RESULT_OK) {
+                            showError(getString(R.string.extract_feature_failed), getFingerprintErrorString(error));
+                        } else {
+                            showInformation(getString(R.string.extract_feature_success), null);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error in FingerprintTask", e);
+                showError("unexpected_error:: ", e.getMessage());
+            } finally {
+                enableControl(true);
+                dismissProgressDialog();
+                mIsDone = true;
+            }
+            return null;
+        }
+
+
+
+//        @Override
+        protected Void doInBackground12(String... params) {
             long startTime, captureTime = -1, extractTime = -1, generalizeTime = -1, verifyTime = -1;
             FingerprintImage fi = null;
             byte[] fpFeat = null, fpTemp = null;

@@ -1,4 +1,4 @@
-#Sat Sep 14 18:19:13 BDT 2024
+#Sun Sep 15 10:51:23 BDT 2024
 base.0=C\:\\Users\\MHL-PC-20\\AndroidStudioProjects\\Aratek_BMApi_Demo1\\Aratek_BMApi_Demo1\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\MHL-PC-20\\AndroidStudioProjects\\Aratek_BMApi_Demo1\\Aratek_BMApi_Demo1\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\MHL-PC-20\\AndroidStudioProjects\\Aratek_BMApi_Demo1\\Aratek_BMApi_Demo1\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
